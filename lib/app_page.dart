@@ -27,6 +27,11 @@ class AppPage extends StatelessWidget {
     String path = await ExternalPath.getExternalStoragePublicDirectory(
         ExternalPath.DIRECTORY_DOCUMENTS);
 
+    bool docExists = await File('$path').exists();
+    if (!docExists) {
+      Directory(path).create();
+    }
+
     String file = "{}";
     bool exists = await File('$path/packages.json').exists();
 
